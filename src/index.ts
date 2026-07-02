@@ -4,6 +4,7 @@ export * from "./Card";
 export * from "./Checkbox";
 export * from "./DataTable";
 export * from "./DatePicker";
+export * from "./DateTimePicker";
 export * from "./Dialog";
 export * from "./Field";
 export * from "./IconButton";
