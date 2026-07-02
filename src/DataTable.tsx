@@ -17,14 +17,16 @@ export interface DataTableProps<T> {
   className?: string;
 }
 
-export function DataTable<T extends Record<string, unknown>>({
+export function DataTable<T>({
   columns,
   rows,
   rowKey,
   emptyText = "데이터가 없습니다.",
   className,
 }: DataTableProps<T>) {
-  const getRowKey = (row: T, index: number) => (typeof rowKey === "function" ? rowKey(row, index) : (row[rowKey] as React.Key));
+  const getCell = (row: T, key: keyof T | string) => (row as Record<string, unknown>)[key as string];
+  const getRowKey = (row: T, index: number) =>
+    typeof rowKey === "function" ? rowKey(row, index) : (getCell(row, rowKey) as React.Key);
 
   return (
     <div className={cx("overflow-x-auto", className)}>
@@ -66,7 +68,7 @@ export function DataTable<T extends Record<string, unknown>>({
                       column.align === "right" && "text-right",
                     )}
                   >
-                    {column.render ? column.render(row, rowIndex) : String(row[column.key] ?? "")}
+                    {column.render ? column.render(row, rowIndex) : String(getCell(row, column.key) ?? "")}
                   </td>
                 ))}
               </tr>
