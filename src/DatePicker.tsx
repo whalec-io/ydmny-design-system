@@ -1,17 +1,18 @@
 import * as React from "react";
 import { cx } from "./utils";
 
-export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+export interface DatePickerProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "type"> {
   invalid?: boolean;
 }
 
-export const Input = React.forwardRef<HTMLInputElement, InputProps>(({ className, invalid, ...props }, ref) => (
+// 네이티브 <input type="date"> 기반 날짜 선택기 (값은 "YYYY-MM-DD" 문자열)
+export const DatePicker = React.forwardRef<HTMLInputElement, DatePickerProps>(({ className, invalid, ...props }, ref) => (
   <input
     ref={ref}
+    type="date"
     className={cx(
       "h-9 w-full rounded-md border bg-white px-3 text-[13px] text-gray-800 transition-colors",
-      "placeholder:text-gray-300 disabled:cursor-not-allowed disabled:bg-gray-50 disabled:text-gray-400",
-      "read-only:cursor-default read-only:bg-gray-50 read-only:text-gray-500",
+      "disabled:cursor-not-allowed disabled:bg-gray-50 disabled:text-gray-400",
       "focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-100",
       invalid ? "border-red-400 focus:border-red-500 focus:ring-red-100" : "border-gray-300",
       className,
@@ -20,4 +21,4 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(({ className
   />
 ));
 
-Input.displayName = "Input";
+DatePicker.displayName = "DatePicker";
