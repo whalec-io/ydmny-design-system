@@ -17,16 +17,9 @@ export interface DataTableProps<T> {
   className?: string;
 }
 
-export function DataTable<T>({
-  columns,
-  rows,
-  rowKey,
-  emptyText = "데이터가 없습니다.",
-  className,
-}: DataTableProps<T>) {
+export function DataTable<T>({ columns, rows, rowKey, emptyText = "데이터가 없습니다.", className }: DataTableProps<T>) {
   const getCell = (row: T, key: keyof T | string) => (row as Record<string, unknown>)[key as string];
-  const getRowKey = (row: T, index: number) =>
-    typeof rowKey === "function" ? rowKey(row, index) : (getCell(row, rowKey) as React.Key);
+  const getRowKey = (row: T, index: number) => (typeof rowKey === "function" ? rowKey(row, index) : (getCell(row, rowKey) as React.Key));
 
   return (
     <div className={cx("overflow-x-auto", className)}>
