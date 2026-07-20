@@ -47,12 +47,12 @@ export function Dialog({
         style={{ maxWidth: width }}
       >
         <div className="flex shrink-0 items-center justify-between border-b border-gray-200 px-4 py-3">
-          <span className="text-[13px] font-semibold text-gray-800">{title}</span>
+          <span className="text-[14px] font-semibold text-gray-800">{title}</span>
           <IconButton size="sm" onClick={onClose} aria-label="닫기">
             <span className="text-[16px] leading-none">x</span>
           </IconButton>
         </div>
-        <div className="flex-1 overflow-y-auto text-[12px] text-gray-800">{children}</div>
+        <div className="flex-1 overflow-y-auto text-[13px] text-gray-800">{children}</div>
         <div className="flex shrink-0 items-center justify-end gap-2 border-t border-gray-200 px-4 py-3">
           {actions ?? (
             <>
