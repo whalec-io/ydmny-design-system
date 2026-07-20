@@ -61,6 +61,8 @@ React와 React DOM은 앱 프로젝트에서 직접 설치합니다.
 
 색상, 타이포그래피, radius의 기본 토큰 전체 목록은 `@ydmnypg/design-system/theme.css`에서 확인할 수 있습니다.
 
+Button의 글자 크기는 크기 옵션과 관계없이 `--ydmnypg-font-size-button` 토큰을 사용하며 기본값은 `13px`입니다.
+
 기본 theme color는 `base`, `primary`, `secondary`, `tertiary`, `info`, `success`, `warning`, `error`, `inverse`입니다. 각 색상은 `--ydmnypg-color-{themeColor}`, `-hover`, `-subtle` 토큰으로 재정의할 수 있습니다.
 
 ## 사용법

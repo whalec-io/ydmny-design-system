@@ -29,11 +29,11 @@ const variantClass: Record<ButtonVariant, string> = {
 };
 
 const sizeClass: Record<ButtonSize, string> = {
-  small: "h-8 px-3 text-[length:var(--ydmnypg-font-size-caption)] leading-[var(--ydmnypg-line-height-caption)]",
-  medium: "h-9 px-4 text-[length:var(--ydmnypg-font-size-description)] leading-[var(--ydmnypg-line-height-description)]",
-  large: "h-10 px-5 text-[length:var(--ydmnypg-font-size-body)] leading-[var(--ydmnypg-line-height-body)]",
-  sm: "h-8 px-3 text-[length:var(--ydmnypg-font-size-caption)] leading-[var(--ydmnypg-line-height-caption)]",
-  md: "h-9 px-4 text-[length:var(--ydmnypg-font-size-description)] leading-[var(--ydmnypg-line-height-description)]",
+  small: "h-8 px-3 text-[length:var(--ydmnypg-font-size-button)] leading-[var(--ydmnypg-line-height-caption)]",
+  medium: "h-9 px-4 text-[length:var(--ydmnypg-font-size-button)] leading-[var(--ydmnypg-line-height-description)]",
+  large: "h-10 px-5 text-[length:var(--ydmnypg-font-size-button)] leading-[var(--ydmnypg-line-height-body)]",
+  sm: "h-8 px-3 text-[length:var(--ydmnypg-font-size-button)] leading-[var(--ydmnypg-line-height-caption)]",
+  md: "h-9 px-4 text-[length:var(--ydmnypg-font-size-button)] leading-[var(--ydmnypg-line-height-description)]",
 };
 
 const roundedClass: Record<ButtonRounded, string> = {
