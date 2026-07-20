@@ -117,7 +117,7 @@ export function DataGrid<T>({
 
   return (
     <div className={cx("overflow-auto rounded-md border border-gray-200", className)} style={{ maxHeight }}>
-      <table className="w-full border-collapse text-[13px]">
+      <table className="w-full border-collapse text-[12px]">
         <thead className="sticky top-0 z-10">
           <tr className="bg-gray-100">
             {columns.map(col => {
@@ -161,7 +161,7 @@ export function DataGrid<T>({
                           if (e.key === "Enter") setOpenFilter(null);
                         }}
                         placeholder="검색어"
-                        className="w-full rounded-md border border-gray-300 px-2 py-1 text-[13px] focus:border-blue-500 focus:outline-none"
+                        className="w-full rounded-md border border-gray-300 px-2 py-1 text-[12px] focus:border-blue-500 focus:outline-none"
                       />
                     </div>
                   )}

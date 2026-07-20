@@ -13,15 +13,15 @@ export interface FieldProps {
 export function Field({ label, required, hint, error, children, className }: FieldProps) {
   return (
     <label className={cx("flex flex-col gap-1", className)}>
-      <span className="text-[12px] text-gray-500">
+      <span className="text-[11px] text-gray-500">
         {label}
         {required && <span className="ml-0.5 text-red-500">*</span>}
       </span>
       {children}
       {error ? (
-        <span className="text-[11px] text-red-500">{error}</span>
+        <span className="text-[10px] text-red-500">{error}</span>
       ) : (
-        hint && <span className="text-[11px] text-gray-400">{hint}</span>
+        hint && <span className="text-[10px] text-gray-400">{hint}</span>
       )}
     </label>
   );
