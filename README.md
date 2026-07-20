@@ -61,16 +61,6 @@ export function ExampleForm() {
 }
 ```
 
-업무 화면의 페이지 제목과 설명, 주요 액션은 `PageHeader`로 구성합니다.
-
-```tsx
-<PageHeader title="계정 관리" description="관리자와 매니저 계정을 관리합니다.">
-  <Button variant="primary">계정 등록</Button>
-</PageHeader>
-```
-
-버튼과 폼 컨트롤은 관리 화면의 정보 밀도를 고려한 compact 타이포그래피를 기본값으로 사용하며, 클릭 영역 높이는 유지합니다.
-
 공개 타입도 함께 제공합니다.
 
 ```tsx
