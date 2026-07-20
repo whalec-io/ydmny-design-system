@@ -34,10 +34,16 @@ type SortState = { key: string; dir: "asc" | "desc" } | null;
 
 const IconSort = ({ dir }: { dir: "asc" | "desc" | null }) => (
   <svg width="10" height="10" viewBox="0 0 24 24" fill="none" className="shrink-0">
-    <path d="M7 10l5-5 5 5" stroke={dir === "asc" ? "#2563eb" : "#cbd5e1"} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+    <path
+      d="M7 10l5-5 5 5"
+      stroke={dir === "asc" ? "var(--ydmnypg-color-primary)" : "var(--ydmnypg-color-border)"}
+      strokeWidth="2.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
     <path
       d="M7 14l5 5 5-5"
-      stroke={dir === "desc" ? "#2563eb" : "#cbd5e1"}
+      stroke={dir === "desc" ? "var(--ydmnypg-color-primary)" : "var(--ydmnypg-color-border)"}
       strokeWidth="2.5"
       strokeLinecap="round"
       strokeLinejoin="round"
@@ -47,7 +53,12 @@ const IconSort = ({ dir }: { dir: "asc" | "desc" | null }) => (
 
 const IconFilter = ({ active }: { active: boolean }) => (
   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" className="shrink-0">
-    <path d="M3 5h18l-7 8v5l-4 2v-7L3 5z" stroke={active ? "#2563eb" : "#9ca3af"} strokeWidth="1.8" strokeLinejoin="round" />
+    <path
+      d="M3 5h18l-7 8v5l-4 2v-7L3 5z"
+      stroke={active ? "var(--ydmnypg-color-primary)" : "var(--ydmnypg-color-text-subtle)"}
+      strokeWidth="1.8"
+      strokeLinejoin="round"
+    />
   </svg>
 );
 
@@ -116,10 +127,13 @@ export function DataGrid<T>({
   const alignClass = (a?: string) => (a === "center" ? "text-center" : a === "right" ? "text-right" : "text-left");
 
   return (
-    <div className={cx("overflow-auto rounded-md border border-gray-200", className)} style={{ maxHeight }}>
-      <table className="w-full border-collapse text-[13px]">
+    <div
+      className={cx("overflow-auto rounded-[var(--ydmnypg-radius-md)] border border-[color:var(--ydmnypg-color-border-subtle)]", className)}
+      style={{ maxHeight }}
+    >
+      <table className="w-full border-collapse text-[length:var(--ydmnypg-font-size-description)] leading-[var(--ydmnypg-line-height-description)]">
         <thead className="sticky top-0 z-10">
-          <tr className="bg-gray-100">
+          <tr className="bg-[color:var(--ydmnypg-color-surface-muted)]">
             {columns.map(col => {
               const canSort = sortable && col.sortable !== false;
               const canFilter = filterable && col.filterable;
@@ -129,12 +143,15 @@ export function DataGrid<T>({
                   key={col.key}
                   style={{ width: col.width }}
                   className={cx(
-                    "relative border-b border-gray-300 px-2.5 py-2 font-medium text-gray-600 whitespace-nowrap",
+                    "relative border-b border-[color:var(--ydmnypg-color-border)] px-2.5 py-2 font-medium text-[color:var(--ydmnypg-color-text-muted)] whitespace-nowrap",
                     alignClass(col.align),
                   )}
                 >
                   <div className="flex items-center gap-1">
-                    <span className={cx("truncate", canSort && "cursor-pointer hover:text-gray-900")} onClick={() => toggleSort(col)}>
+                    <span
+                      className={cx("truncate", canSort && "cursor-pointer hover:text-[color:var(--ydmnypg-color-text-primary)]")}
+                      onClick={() => toggleSort(col)}
+                    >
                       {col.title}
                     </span>
                     {canSort && <IconSort dir={sort?.key === col.key ? sort.dir : null} />}
@@ -142,7 +159,7 @@ export function DataGrid<T>({
                       <button
                         type="button"
                         onClick={() => setOpenFilter(openFilter === col.key ? null : col.key)}
-                        className="cursor-pointer rounded p-0.5 hover:bg-gray-200"
+                        className="cursor-pointer rounded-[var(--ydmnypg-radius-sm)] p-0.5 hover:bg-[color:var(--ydmnypg-color-border-subtle)]"
                       >
                         <IconFilter active={isFiltered} />
                       </button>
@@ -150,7 +167,7 @@ export function DataGrid<T>({
                   </div>
                   {canFilter && openFilter === col.key && (
                     <div
-                      className="absolute left-0 top-full z-20 mt-1 w-[200px] rounded-md border border-gray-200 bg-white p-2 shadow-lg"
+                      className="absolute left-0 top-full z-20 mt-1 w-[200px] rounded-[var(--ydmnypg-radius-md)] border border-[color:var(--ydmnypg-color-border-subtle)] bg-[color:var(--ydmnypg-color-surface)] p-2 shadow-lg"
                       onClick={e => e.stopPropagation()}
                     >
                       <input
@@ -161,7 +178,7 @@ export function DataGrid<T>({
                           if (e.key === "Enter") setOpenFilter(null);
                         }}
                         placeholder="검색어"
-                        className="w-full rounded-md border border-gray-300 px-2 py-1 text-[13px] focus:border-blue-500 focus:outline-none"
+                        className="w-full rounded-[var(--ydmnypg-radius-md)] border border-[color:var(--ydmnypg-color-border)] px-2 py-1 text-[length:var(--ydmnypg-font-size-description)] leading-[var(--ydmnypg-line-height-description)] focus:border-[color:var(--ydmnypg-color-primary)] focus:outline-none"
                       />
                     </div>
                   )}
@@ -173,7 +190,7 @@ export function DataGrid<T>({
         <tbody>
           {processed.length === 0 ? (
             <tr>
-              <td colSpan={columns.length} className="py-8 text-center text-gray-400">
+              <td colSpan={columns.length} className="py-8 text-center text-[color:var(--ydmnypg-color-text-subtle)]">
                 {emptyText}
               </td>
             </tr>
@@ -185,10 +202,20 @@ export function DataGrid<T>({
                 <tr
                   key={k}
                   onClick={() => onRowClick?.(row, index)}
-                  className={cx("border-b border-gray-100", onRowClick && "cursor-pointer", selected ? "bg-blue-50" : "hover:bg-gray-50")}
+                  className={cx(
+                    "border-b border-[color:var(--ydmnypg-color-border-subtle)]",
+                    onRowClick && "cursor-pointer",
+                    selected ? "bg-[color:var(--ydmnypg-color-surface-selected)]" : "hover:bg-[color:var(--ydmnypg-color-surface-subtle)]",
+                  )}
                 >
                   {columns.map(col => (
-                    <td key={col.key} className={cx("border-b border-gray-100 px-2.5 py-2 text-gray-700", alignClass(col.align))}>
+                    <td
+                      key={col.key}
+                      className={cx(
+                        "border-b border-[color:var(--ydmnypg-color-border-subtle)] px-2.5 py-2 text-[color:var(--ydmnypg-color-text-secondary)]",
+                        alignClass(col.align),
+                      )}
+                    >
                       {col.render ? col.render(row, index) : String(getCell(row, col) ?? "")}
                     </td>
                   ))}

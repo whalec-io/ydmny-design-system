@@ -15,7 +15,7 @@ StudioYS 웹 앱에서 공통으로 사용하는 React/Tailwind UI 컴포넌트 
 - `Card`, `SummaryCard`, `Badge`, `Section`
 - `Dialog`
 - `DataTable`
-- `PageHeader`
+- `PageHeader`, `Typography`
 
 ## 설치
 
@@ -41,8 +41,27 @@ React와 React DOM은 앱 프로젝트에서 직접 설치합니다.
 
 ```css
 @import "tailwindcss";
+@import "@ydmnypg/design-system/theme.css";
 @source "../node_modules/@ydmnypg/design-system/dist";
 ```
+
+## 테마
+
+패키지는 기본 테마를 제공합니다. 앱의 CSS에서 `--ydmnypg-*` 변수를 재정의하면 모든 디자인 시스템 컴포넌트에 적용됩니다.
+
+```css
+:root {
+  --ydmnypg-color-primary: #7c3aed;
+  --ydmnypg-color-primary-hover: #6d28d9;
+  --ydmnypg-color-text-primary: #111827;
+  --ydmnypg-font-size-page-title: 20px;
+  --ydmnypg-radius-md: 8px;
+}
+```
+
+색상, 타이포그래피, radius의 기본 토큰 전체 목록은 `@ydmnypg/design-system/theme.css`에서 확인할 수 있습니다.
+
+기본 theme color는 `base`, `primary`, `secondary`, `tertiary`, `info`, `success`, `warning`, `error`, `inverse`입니다. 각 색상은 `--ydmnypg-color-{themeColor}`, `-hover`, `-subtle` 토큰으로 재정의할 수 있습니다.
 
 ## 사용법
 
@@ -60,6 +79,45 @@ export function ExampleForm() {
   );
 }
 ```
+
+## Button
+
+새 Button API는 `themeColor`, `fillMode`, `size`, `rounded`를 조합합니다.
+
+```tsx
+<Button themeColor="primary">저장</Button>
+<Button themeColor="success" fillMode="outline" size="large">
+  승인
+</Button>
+<Button themeColor="error" fillMode="link" rounded="full" size="small">
+  삭제
+</Button>
+```
+
+- `themeColor`: `base`, `primary`, `secondary`, `tertiary`, `info`, `success`, `warning`, `error`, `inverse`
+- `fillMode`: `solid` (기본), `flat`, `outline`, `clear`, `link`
+- `size`: `small`, `medium` (기본), `large`
+- `rounded`: `small`, `medium` (기본), `large`, `full`
+
+기존 `variant="primary|secondary|ghost|danger"`, `size="sm|md"` 사용도 계속 지원합니다. 기존 prop만 사용하거나 prop을 생략하면 이전 Button 스타일이 유지됩니다.
+
+## 타이포그래피
+
+의미 기반 `Typography` variant로 폰트 크기와 행간을 일관되게 적용합니다. 색상과 여백은 `className`으로 지정합니다.
+
+```tsx
+import { Typography } from "@ydmnypg/design-system";
+
+<Typography as="h1" variant="page-title" className="text-gray-800">
+  페이지 제목
+</Typography>;
+
+<Typography variant="description" className="text-gray-500">
+  제목을 보완하는 설명입니다.
+</Typography>;
+```
+
+지원 variant: `page-title` (18px), `section-title` (16px), `body` (14px), `description` (13px), `caption` (12px).
 
 공개 타입도 함께 제공합니다.
 

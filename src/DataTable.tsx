@@ -23,14 +23,14 @@ export function DataTable<T>({ columns, rows, rowKey, emptyText = "데이터가 
 
   return (
     <div className={cx("overflow-x-auto", className)}>
-      <table className="w-full border-collapse text-[12px]">
+      <table className="w-full border-collapse text-[length:var(--ydmnypg-font-size-caption)] leading-[var(--ydmnypg-line-height-caption)]">
         <thead>
-          <tr className="border-b border-gray-200 bg-gray-50">
+          <tr className="border-b border-[color:var(--ydmnypg-color-border-subtle)] bg-[color:var(--ydmnypg-color-surface-subtle)]">
             {columns.map(column => (
               <th
                 key={String(column.key)}
                 className={cx(
-                  "px-2.5 py-2 font-medium text-gray-500",
+                  "px-2.5 py-2 font-medium text-[color:var(--ydmnypg-color-text-muted)]",
                   column.align === "center" && "text-center",
                   column.align === "right" && "text-right",
                   (!column.align || column.align === "left") && "text-left",
@@ -45,18 +45,21 @@ export function DataTable<T>({ columns, rows, rowKey, emptyText = "데이터가 
         <tbody>
           {rows.length === 0 ? (
             <tr>
-              <td colSpan={columns.length} className="p-6 text-center text-[12px] text-gray-400">
+              <td colSpan={columns.length} className="p-6 text-center text-[color:var(--ydmnypg-color-text-subtle)]">
                 {emptyText}
               </td>
             </tr>
           ) : (
             rows.map((row, rowIndex) => (
-              <tr key={getRowKey(row, rowIndex)} className="border-b border-gray-100 hover:bg-gray-50/70">
+              <tr
+                key={getRowKey(row, rowIndex)}
+                className="border-b border-[color:var(--ydmnypg-color-border-subtle)] hover:bg-[color:var(--ydmnypg-color-surface-subtle)]"
+              >
                 {columns.map(column => (
                   <td
                     key={String(column.key)}
                     className={cx(
-                      "px-2.5 py-2 text-gray-700",
+                      "px-2.5 py-2 text-[color:var(--ydmnypg-color-text-secondary)]",
                       column.align === "center" && "text-center",
                       column.align === "right" && "text-right",
                     )}

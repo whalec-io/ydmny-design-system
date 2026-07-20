@@ -12,6 +12,7 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
     },
+    "./theme.css": "./dist/theme.css",
     "./package.json": "./package.json"
   },
   "files": [
@@ -26,7 +27,7 @@
     "react-dom": "^18.0.0 || ^19.0.0"
   },
   "scripts": {
-    "build": "tsc -p tsconfig.build.json",
+    "build": "tsc -p tsconfig.build.json && node scripts/copy-theme.mjs",
     "format": "prettier --write . --ignore-unknown",
     "format:check": "prettier --check . --ignore-unknown",
     "prepack": "npm run build",
