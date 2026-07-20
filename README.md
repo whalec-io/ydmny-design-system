@@ -103,6 +103,43 @@ export function ExampleForm() {
 
 기존 `variant="primary|secondary|ghost|danger"`, `size="sm|md"` 사용도 계속 지원합니다. 기존 prop만 사용하거나 prop을 생략하면 이전 Button 스타일이 유지됩니다.
 
+## DataGrid 페이징
+
+`pageable`을 설정하면 정렬·필터 결과에 대해 클라이언트 사이드 페이징을 제공합니다.
+
+```tsx
+<DataGrid
+  columns={columns}
+  rows={rows}
+  rowKey="id"
+  pageable
+  pageSize={20}
+  pageSizeOptions={[10, 20, 50]}
+  onPageChange={page => console.log(page)}
+  onPageSizeChange={pageSize => console.log(pageSize)}
+/>
+```
+
+`page`와 `pageSize`를 전달하면 각각 제어형으로 사용할 수 있습니다. `pageable`의 기본값은 `false`입니다.
+`DataTable`도 동일한 props를 지원하며, 예시의 `DataGrid`를 `DataTable`로 바꿔 사용할 수 있습니다.
+
+## DataGrid 무한 스크롤
+
+`infiniteScroll`을 설정하면 스크롤 위치에 따라 행을 점진적으로 렌더링합니다.
+
+```tsx
+<DataGrid columns={columns} rows={rows} rowKey="id" infiniteScroll initialRenderCount={50} loadMoreCount={50} />
+```
+
+외부 API에서 다음 행을 가져오는 경우에는 `hasMore`, `loading`, `onLoadMore`를 함께 사용합니다.
+
+```tsx
+<DataGrid columns={columns} rows={rows} rowKey="id" infiniteScroll hasMore={hasMore} loading={isLoading} onLoadMore={fetchNextPage} />
+```
+
+`infiniteScroll`의 기본값은 `false`입니다. `pageable`과 `infiniteScroll`을 동시에 설정하면 페이징이 우선 적용됩니다.
+`DataTable`에도 동일하게 적용됩니다.
+
 ## 타이포그래피
 
 의미 기반 `Typography` variant로 폰트 크기와 행간을 일관되게 적용합니다. 색상과 여백은 `className`으로 지정합니다.

@@ -6,9 +6,10 @@ export interface CheckboxProps {
   label?: string;
   disabled?: boolean;
   className?: string;
+  ariaLabel?: string;
 }
 
-export function Checkbox({ checked = false, onCheckedChange, label, disabled, className }: CheckboxProps) {
+export function Checkbox({ checked = false, onCheckedChange, label, disabled, className, ariaLabel }: CheckboxProps) {
   return (
     <label
       className={cx(
@@ -20,6 +21,7 @@ export function Checkbox({ checked = false, onCheckedChange, label, disabled, cl
       <button
         type="button"
         disabled={disabled}
+        aria-label={ariaLabel}
         aria-pressed={checked}
         onClick={event => {
           event.preventDefault();
