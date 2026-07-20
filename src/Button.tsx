@@ -18,8 +18,8 @@ const variantClass: Record<ButtonVariant, string> = {
 };
 
 const sizeClass: Record<ButtonSize, string> = {
-  sm: "h-8 px-3 text-[12px]",
-  md: "h-9 px-4 text-[13px]",
+  sm: "h-8 px-3 text-[11px]",
+  md: "h-9 px-4 text-[12px]",
 };
 
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
