@@ -52,6 +52,8 @@ export interface DataTableProps<T> {
   loading?: boolean;
   /** Called at the end of the scroll after all currently supplied rows are rendered. */
   onLoadMore?: () => void;
+  /** Called when a data row is selected by click, Enter, or Space. */
+  onRowClick?: (row: T, index: number) => void;
   className?: string;
 }
 
@@ -79,6 +81,7 @@ export function DataTable<T>({
   hasMore,
   loading = false,
   onLoadMore,
+  onRowClick,
   className,
 }: DataTableProps<T>) {
   const getCell = (row: T, key: keyof T | string) => (row as Record<string, unknown>)[key as string];
@@ -176,7 +179,10 @@ export function DataTable<T>({
         <tbody>
           {rows.length === 0 ? (
             <tr>
-              <td colSpan={columns.length + (showIndex ? 1 : 0) + (selectable ? 1 : 0)} className="p-6 text-center text-[color:var(--ydmnypg-color-text-subtle)]">
+              <td
+                colSpan={columns.length + (showIndex ? 1 : 0) + (selectable ? 1 : 0)}
+                className="p-6 text-center text-[color:var(--ydmnypg-color-text-subtle)]"
+              >
                 {emptyText}
               </td>
             </tr>
@@ -188,7 +194,18 @@ export function DataTable<T>({
               return (
                 <tr
                   key={k}
-                  className="border-b border-[color:var(--ydmnypg-color-border-subtle)] hover:bg-[color:var(--ydmnypg-color-surface-subtle)]"
+                  tabIndex={onRowClick ? 0 : undefined}
+                  className={cx(
+                    "border-b border-[color:var(--ydmnypg-color-border-subtle)] hover:bg-[color:var(--ydmnypg-color-surface-subtle)]",
+                    onRowClick &&
+                      "cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[color:var(--ydmnypg-color-primary)]",
+                  )}
+                  onClick={() => onRowClick?.(row, rowIndex)}
+                  onKeyDown={event => {
+                    if (!onRowClick || (event.key !== "Enter" && event.key !== " ")) return;
+                    event.preventDefault();
+                    onRowClick(row, rowIndex);
+                  }}
                 >
                   {selectable && (
                     <td className="px-2.5 py-2 text-center" onClick={event => event.stopPropagation()}>
@@ -202,9 +219,7 @@ export function DataTable<T>({
                     </td>
                   )}
                   {showIndex && (
-                    <td className="px-2.5 py-2 text-center text-[color:var(--ydmnypg-color-text-secondary)]">
-                      {rowIndex + 1}
-                    </td>
+                    <td className="px-2.5 py-2 text-center text-[color:var(--ydmnypg-color-text-secondary)]">{rowIndex + 1}</td>
                   )}
                   {columns.map(column => (
                     <td
