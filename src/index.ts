@@ -14,4 +14,5 @@ export * from "./PageHeader";
 export * from "./Section";
 export * from "./Select";
 export * from "./Textarea";
+export * from "./Typography";
 export * from "./utils";

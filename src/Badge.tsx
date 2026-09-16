@@ -8,18 +8,22 @@ export interface BadgeProps extends React.HTMLAttributes<HTMLSpanElement> {
 }
 
 const toneClass: Record<BadgeTone, string> = {
-  blue: "bg-blue-50 text-blue-700",
-  green: "bg-emerald-50 text-emerald-700",
-  gray: "bg-gray-100 text-gray-600",
-  red: "bg-red-50 text-red-700",
-  amber: "bg-amber-50 text-amber-700",
-  indigo: "bg-indigo-50 text-indigo-700",
+  blue: "bg-[color:var(--ydmnypg-color-primary-subtle)] text-[color:var(--ydmnypg-color-primary)]",
+  green: "bg-[color:var(--ydmnypg-color-success-subtle)] text-[color:var(--ydmnypg-color-success)]",
+  gray: "bg-[color:var(--ydmnypg-color-surface-muted)] text-[color:var(--ydmnypg-color-text-muted)]",
+  red: "bg-[color:var(--ydmnypg-color-danger-subtle)] text-[color:var(--ydmnypg-color-danger)]",
+  amber: "bg-[color:var(--ydmnypg-color-warning-subtle)] text-[color:var(--ydmnypg-color-warning)]",
+  indigo: "bg-[color:var(--ydmnypg-color-indigo-subtle)] text-[color:var(--ydmnypg-color-indigo)]",
 };
 
 export function Badge({ className, tone = "gray", ...props }: BadgeProps) {
   return (
     <span
-      className={cx("inline-flex h-5 shrink-0 items-center rounded-full px-2 text-[11px] font-medium", toneClass[tone], className)}
+      className={cx(
+        "inline-flex h-5 shrink-0 items-center rounded-full px-2 text-[length:var(--ydmnypg-font-size-meta)] font-medium leading-[var(--ydmnypg-line-height-meta)]",
+        toneClass[tone],
+        className,
+      )}
       {...props}
     />
   );

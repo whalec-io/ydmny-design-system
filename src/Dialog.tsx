@@ -38,22 +38,28 @@ export function Dialog({
 
   return (
     <div className="fixed inset-0 z-[10000] flex items-center justify-center p-4">
-      <div className="absolute inset-0 bg-gray-950/35" onMouseDown={onClose} />
+      <div className="absolute inset-0 bg-[color:var(--ydmnypg-color-overlay)]" onMouseDown={onClose} />
       <div
         role="dialog"
         aria-modal="true"
         aria-label={title}
-        className={cx("relative flex max-h-[90vh] w-full flex-col rounded-lg bg-white shadow-xl")}
+        className={cx(
+          "relative flex max-h-[90vh] w-full flex-col rounded-[var(--ydmnypg-radius-lg)] bg-[color:var(--ydmnypg-color-surface)] shadow-xl",
+        )}
         style={{ maxWidth: width }}
       >
-        <div className="flex shrink-0 items-center justify-between border-b border-gray-200 px-4 py-3">
-          <span className="text-[14px] font-semibold text-gray-800">{title}</span>
+        <div className="flex shrink-0 items-center justify-between border-b border-[color:var(--ydmnypg-color-border-subtle)] px-4 py-3">
+          <span className="text-[length:var(--ydmnypg-font-size-body)] font-semibold leading-[var(--ydmnypg-line-height-body)] text-[color:var(--ydmnypg-color-text-primary)]">
+            {title}
+          </span>
           <IconButton size="sm" onClick={onClose} aria-label="닫기">
-            <span className="text-[16px] leading-none">x</span>
+            <span className="text-[length:var(--ydmnypg-font-size-section-title)] leading-none">x</span>
           </IconButton>
         </div>
-        <div className="flex-1 overflow-y-auto text-[13px] text-gray-800">{children}</div>
-        <div className="flex shrink-0 items-center justify-end gap-2 border-t border-gray-200 px-4 py-3">
+        <div className="flex-1 overflow-y-auto text-[length:var(--ydmnypg-font-size-description)] leading-[var(--ydmnypg-line-height-description)] text-[color:var(--ydmnypg-color-text-primary)]">
+          {children}
+        </div>
+        <div className="flex shrink-0 items-center justify-end gap-2 border-t border-[color:var(--ydmnypg-color-border-subtle)] px-4 py-3">
           {actions ?? (
             <>
               <Button variant="secondary" onClick={onClose}>

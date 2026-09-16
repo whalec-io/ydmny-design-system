@@ -9,11 +9,13 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(({ 
   <textarea
     ref={ref}
     className={cx(
-      "min-h-24 w-full rounded-md border bg-white px-3 py-2 text-[13px] text-gray-800 transition-colors",
-      "placeholder:text-gray-300 disabled:cursor-not-allowed disabled:bg-gray-50 disabled:text-gray-400",
-      "read-only:cursor-default read-only:bg-gray-50 read-only:text-gray-500",
-      "focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-100",
-      invalid ? "border-red-400 focus:border-red-500 focus:ring-red-100" : "border-gray-300",
+      "min-h-24 w-full rounded-[var(--ydmnypg-radius-md)] border bg-[color:var(--ydmnypg-color-surface)] px-3 py-2 text-[length:var(--ydmnypg-font-size-description)] leading-[var(--ydmnypg-line-height-description)] text-[color:var(--ydmnypg-color-text-primary)] transition-colors",
+      "placeholder:text-[color:var(--ydmnypg-color-border)] disabled:cursor-not-allowed disabled:bg-[color:var(--ydmnypg-color-surface-subtle)] disabled:text-[color:var(--ydmnypg-color-text-subtle)]",
+      "read-only:cursor-default read-only:bg-[color:var(--ydmnypg-color-surface-subtle)] read-only:text-[color:var(--ydmnypg-color-text-muted)]",
+      "focus:border-[color:var(--ydmnypg-color-primary)] focus:outline-none focus:ring-2 focus:ring-[color:var(--ydmnypg-color-primary-subtle)]",
+      invalid
+        ? "border-[color:var(--ydmnypg-color-danger-border)] focus:border-[color:var(--ydmnypg-color-danger)] focus:ring-[color:var(--ydmnypg-color-danger-subtle)]"
+        : "border-[color:var(--ydmnypg-color-border)]",
       className,
     )}
     {...props}

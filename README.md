@@ -15,7 +15,7 @@ StudioYS 웹 앱에서 공통으로 사용하는 React/Tailwind UI 컴포넌트 
 - `Card`, `SummaryCard`, `Badge`, `Section`
 - `Dialog`
 - `DataTable`
-- `PageHeader`
+- `PageHeader`, `Typography`
 
 ## 설치
 
@@ -41,8 +41,29 @@ React와 React DOM은 앱 프로젝트에서 직접 설치합니다.
 
 ```css
 @import "tailwindcss";
+@import "@ydmnypg/design-system/theme.css";
 @source "../node_modules/@ydmnypg/design-system/dist";
 ```
+
+## 테마
+
+패키지는 기본 테마를 제공합니다. 앱의 CSS에서 `--ydmnypg-*` 변수를 재정의하면 모든 디자인 시스템 컴포넌트에 적용됩니다.
+
+```css
+:root {
+  --ydmnypg-color-primary: #7c3aed;
+  --ydmnypg-color-primary-hover: #6d28d9;
+  --ydmnypg-color-text-primary: #111827;
+  --ydmnypg-font-size-page-title: 20px;
+  --ydmnypg-radius-md: 8px;
+}
+```
+
+색상, 타이포그래피, radius의 기본 토큰 전체 목록은 `@ydmnypg/design-system/theme.css`에서 확인할 수 있습니다.
+
+Button의 글자 크기는 크기 옵션과 관계없이 `--ydmnypg-font-size-button` 토큰을 사용하며 기본값은 `13px`입니다.
+
+기본 theme color는 `base`, `primary`, `secondary`, `tertiary`, `info`, `success`, `warning`, `error`, `inverse`입니다. 각 색상은 `--ydmnypg-color-{themeColor}`, `-hover`, `-subtle` 토큰으로 재정의할 수 있습니다.
 
 ## 사용법
 
@@ -60,6 +81,82 @@ export function ExampleForm() {
   );
 }
 ```
+
+## Button
+
+새 Button API는 `themeColor`, `fillMode`, `size`, `rounded`를 조합합니다.
+
+```tsx
+<Button themeColor="primary">저장</Button>
+<Button themeColor="success" fillMode="outline" size="large">
+  승인
+</Button>
+<Button themeColor="error" fillMode="link" rounded="full" size="small">
+  삭제
+</Button>
+```
+
+- `themeColor`: `base`, `primary`, `secondary`, `tertiary`, `info`, `success`, `warning`, `error`, `inverse`
+- `fillMode`: `solid` (기본), `flat`, `outline`, `clear`, `link`
+- `size`: `small`, `medium` (기본), `large`
+- `rounded`: `small`, `medium` (기본), `large`, `full`
+
+기존 `variant="primary|secondary|ghost|danger"`, `size="sm|md"` 사용도 계속 지원합니다. 기존 prop만 사용하거나 prop을 생략하면 이전 Button 스타일이 유지됩니다.
+
+## DataGrid 페이징
+
+`pageable`을 설정하면 정렬·필터 결과에 대해 클라이언트 사이드 페이징을 제공합니다.
+
+```tsx
+<DataGrid
+  columns={columns}
+  rows={rows}
+  rowKey="id"
+  pageable
+  pageSize={20}
+  pageSizeOptions={[10, 20, 50]}
+  onPageChange={page => console.log(page)}
+  onPageSizeChange={pageSize => console.log(pageSize)}
+/>
+```
+
+`page`와 `pageSize`를 전달하면 각각 제어형으로 사용할 수 있습니다. `pageable`의 기본값은 `false`입니다.
+`DataTable`도 동일한 props를 지원하며, 예시의 `DataGrid`를 `DataTable`로 바꿔 사용할 수 있습니다.
+
+## DataGrid 무한 스크롤
+
+`infiniteScroll`을 설정하면 스크롤 위치에 따라 행을 점진적으로 렌더링합니다.
+
+```tsx
+<DataGrid columns={columns} rows={rows} rowKey="id" infiniteScroll initialRenderCount={50} loadMoreCount={50} />
+```
+
+외부 API에서 다음 행을 가져오는 경우에는 `hasMore`, `loading`, `onLoadMore`를 함께 사용합니다.
+
+```tsx
+<DataGrid columns={columns} rows={rows} rowKey="id" infiniteScroll hasMore={hasMore} loading={isLoading} onLoadMore={fetchNextPage} />
+```
+
+`infiniteScroll`의 기본값은 `false`입니다. `pageable`과 `infiniteScroll`을 동시에 설정하면 페이징이 우선 적용됩니다.
+`DataTable`에도 동일하게 적용됩니다.
+
+## 타이포그래피
+
+의미 기반 `Typography` variant로 폰트 크기와 행간을 일관되게 적용합니다. 색상과 여백은 `className`으로 지정합니다.
+
+```tsx
+import { Typography } from "@ydmnypg/design-system";
+
+<Typography as="h1" variant="page-title" className="text-gray-800">
+  페이지 제목
+</Typography>;
+
+<Typography variant="description" className="text-gray-500">
+  제목을 보완하는 설명입니다.
+</Typography>;
+```
+
+지원 variant: `page-title` (18px), `section-title` (16px), `body` (14px), `description` (13px), `caption` (12px).
 
 공개 타입도 함께 제공합니다.
 
